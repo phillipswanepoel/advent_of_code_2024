@@ -62,12 +62,17 @@ let encode list =
       else (count+1, a) :: aux 0 t
   in aux 0 list
 
-let first_filtered = List.filter (fun a -> List.mem a second_sorted) first_sorted
+let second_encoded = encode second_sorted
+let folder h = List.fold_left (fun acc (x, y) -> if y = h then acc + (x * y) else acc) 0 second_encoded
+let output2 = List.map (fun h -> folder h) first_sorted |> List.fold_left ( + ) 0
+
+let () = (printf "%d\n") output2
+
+(* let first_filtered = List.filter (fun a -> List.mem a second_sorted) first_sorted
 let first_encoded = encode first_filtered
 let second_filtered = List.filter (fun a -> List.mem a first_filtered ) second_sorted
 let second_encoded = encode second_filtered
-
 let output2 =
-  List.fold_left2 (fun acc (x, _) (a, b) -> acc + (a * b * x)) 0 first_encoded second_encoded
+  List.fold_left2 (fun acc (x, _) (a, b) -> acc + (a * b * x)) 0 first_encoded second_encoded 
 
-let () = (printf "%d\n") output2
+let () = (printf "%d\n") output2  *)
