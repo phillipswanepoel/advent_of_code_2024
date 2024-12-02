@@ -35,7 +35,7 @@ let parse_input filename =
     (lefts, rights)
   | Error msg -> failwith msg
 
-let data = parse_input "input"
+let data = parse_input "data/test"
 let first_sorted = fst data |> List.sort compare
 let second_sorted = snd data |> List.sort compare
 let pairs = List.combine first_sorted second_sorted 

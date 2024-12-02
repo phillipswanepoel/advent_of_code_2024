@@ -1,4 +1,4 @@
-package main
+package solutions
 
 import (
 	"fmt"
@@ -7,8 +7,11 @@ import (
 	"strings"
 )
 
-func main() {
-	input, _ := os.ReadFile("input")
+// THIS SOLUTION COPY PASTED FROM REDDIT FOR REFERENCE
+// FULL CREDIT TO: https://github.com/mnml
+
+func Solve_1() {
+	input, _ := os.ReadFile("data/1/input")
 
 	var list1, list2 []int
 	counts2 := map[int]int{}
@@ -37,4 +40,13 @@ func abs(x int) int {
 		return -x
 	}
 	return x
+}
+
+func sign(x int) int {
+	if x > 0 {
+		return 1
+	} else if x < 0 {
+		return -1
+	}
+	return 0
 }
