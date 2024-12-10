@@ -1,0 +1,2314 @@
+<!DOCTYPE html>
+<html lang="en-US" class=" sdhhf idc0_343"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,maximum-scale=2">
+  <link rel="shortcut icon" type="image/png" href="http://ocamlverse.net/assets/img/favicon-32x32.png">
+  <link rel="stylesheet" type="text/css" media="screen" href="Quick%20and%20Dirty%20Guide%20to%20Monadic%20Parsers%20and%20Angstrom%20_%20OCamlverse_files/style.css">
+  <!-- Search bar -->
+  <link rel="stylesheet" href="Quick%20and%20Dirty%20Guide%20to%20Monadic%20Parsers%20and%20Angstrom%20_%20OCamlverse_files/docsearch.min.css">
+
+
+
+
+
+
+ <!-- generate tags -->
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Quick and Dirty Guide to Monadic Parsers and Angstrom | OCamlverse</title>
+<meta name="generator" content="Jekyll v3.10.0">
+<meta property="og:title" content="Quick and Dirty Guide to Monadic Parsers and Angstrom">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Documenting everything about OCaml">
+<meta property="og:description" content="Documenting everything about OCaml">
+<link rel="canonical" href="http://ocamlverse.net/content/monadic-parsers-angstrom.html">
+<meta property="og:url" content="http://ocamlverse.net/content/monadic-parsers-angstrom.html">
+<meta property="og:site_name" content="OCamlverse">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Quick and Dirty Guide to Monadic Parsers and Angstrom">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Documenting everything about OCaml","headline":"Quick and Dirty Guide to Monadic Parsers and Angstrom","url":"http://ocamlverse.net/content/monadic-parsers-angstrom.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+<!-- Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="Quick%20and%20Dirty%20Guide%20to%20Monadic%20Parsers%20and%20Angstrom%20_%20OCamlverse_files/google-analytics_analytics.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121816895-1');
+</script>
+<meta name="ahrefs-site-verification" content="3a50a718276ee9f3b4733b614ce640e7b86dc7bc7563af98dab0c1d926836976">
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+
+<!-- HEADER -->
+<div id="header_wrap" class="outer">
+  <a id="forkme_banner" href="https://github.com/OCamlverse/ocamlverse.github.io">View on GitHub</a>
+
+  <header class="container">
+    <div id="header_box">
+      <div id="header_img">
+        <a href="http://ocamlverse.net/">
+        <img src="Quick%20and%20Dirty%20Guide%20to%20Monadic%20Parsers%20and%20Angstrom%20_%20OCamlverse_files/ocaml-logo.png" alt="ocaml logo" width="100">
+        </a>
+      </div>
+      <div id="header_title">
+        <h1 id="project_title"><a href="http://ocamlverse.net/">OCamlverse</a></h1>
+        <h2 id="project_tagline">Documenting everything about OCaml</h2>
+      </div>
+    </div>
+
+  </header>
+</div>
+
+<div class="container content_wrapper">
+  <div class="sidebar">
+    <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"><input id="searchbar" type="text" placeholder="Search..." class="ds-input" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-label="search input" aria-owns="algolia-autocomplete-listbox-0" style="position: relative; vertical-align: top;" dir="auto"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: system-ui, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none;"></pre><span class="ds-dropdown-menu" style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;" role="listbox" id="algolia-autocomplete-listbox-0"><div class="ds-dataset-1"></div></span></span>
+
+    
+    
+    <button class="collapsible">Quickstart</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/opam_npm.html">OPAM for npm/yarn users</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/quickstart.html">Quickstart OCaml</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/quickstart_ocaml_project_dune.html">Quickstart an OCaml app project using Dune</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Learning</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/best_practices.html">Best Practices</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/bigarray.html">Bigarray</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/documentation_guidelines.html">OCaml Documentation Guidelines</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/editor_setup.html">Editor Setup</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/faq.html">Frequently asked questions</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/faq_if_semicolon.html">An if, semicolon, and let gotcha</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/learning.html">Learning</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/monadic-parsers-angstrom.html">Quick and Dirty Guide to Monadic Parsers and Angstrom</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/optimizing_performance.html">Optimizing OCaml Performance</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/papers.html">Papers on OCaml</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/ppx.html">A Guide to PreProcessor eXtensions</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/projects.html">Projects</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/qna_links.html">Questions and Answers around the web</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/quickstart.html">Quickstart OCaml</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/quickstart_ocaml_project_dune.html">Quickstart an OCaml app project using Dune</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/tips_tricks.html">Tips and Tricks</a> </li>
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/weak_type_variables.html">Weak Type Variables</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/windows_support.html">Windows Support</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Compiler</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/compiler.html">Compiler</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/objects.html">Object-Oriented Programming in OCaml</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Package management</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/build_systems.html">Package Management</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/opam_npm.html">OPAM for npm/yarn users</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Types</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/weak_type_variables.html">Weak Type Variables</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Best practices</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/best_practices.html">Best Practices</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/documentation_guidelines.html">OCaml Documentation Guidelines</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/optimizing_performance.html">Optimizing OCaml Performance</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Ecosystem</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/apps.html">Applications written in OCaml</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/audio.html">Audio</a> </li>
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/build_systems.html">Package Management</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/code_tools.html">Code Tools</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/command_line.html">Command Line Arguments</a> </li>
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/compilers.html">Compilers, Typecheckers, and Parsers</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/data_struct.html">Data Structures and Algorithms</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/databases.html">Databases</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/debugging.html">Debugging</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/ecosystem.html">Ecosystem</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/editor_setup.html">Editor Setup</a> </li>
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/ffi.html">Foreign Function Interface</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/file_formats.html">File Formats</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/file_manip.html">File Manipulation</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/frp.html">Functional Reactive Programming</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/games.html">Game Development</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/graphics.html">Graphics</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/graphing.html">Graphing, Plotting and Data Visualization</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/hardware_design.html">Hardware Design</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/help_wanted.html">Help Wanted</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/lenses.html">Lenses</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/logging.html">Logging</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/metaprogramming.html">Metaprogramming and PPX</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/mobile.html">Mobile</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/monadic-parsers-angstrom.html">Quick and Dirty Guide to Monadic Parsers and Angstrom</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/monads.html">Monads</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/ocaml_platform.html">OCaml Platform</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/parallelism.html">Concurrency, Parallelism, and Distributed Systems</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/ppx.html">A Guide to PreProcessor eXtensions</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/pretty_printing.html">Pretty Printing</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/protocols.html">Protocols</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/rpc.html">RPC (Remote Procedure Calls)</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/scientific.html">Machine Learning, Deep Learning, Scientific Computing and Data Science</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/searching.html">Searching</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/security.html">Security and Cryptography</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/software_verification.html">Formal Software Verification</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/standard_libraries.html">Standard Libraries</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/static_analysis.html">Static Analysis</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/string_manipulation.html">String Manipulation</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/systems_programming.html">Systems Programming</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/testing.html">Unit Testing</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/ui.html">User Interface</a> </li>
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/unicode.html">Unicode</a> </li>
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/web_networking.html">Web, Networking and Cloud Computing</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Advanced</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/papers.html">Papers on OCaml</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Community</button>
+    <div class="content">
+    <ul>
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/community.html">Community</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+    <button class="collapsible">Meta</button>
+    <div class="content">
+    <ul>
+      
+        
+          <li> <a href="http://ocamlverse.net/content/about.html">About OCamlverse</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+          <li> <a href="http://ocamlverse.net/content/contrib.html">Contributing</a> </li>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+    </div>
+    
+
+    <div class="toc">
+      <h2 class="toc_heading">Page Contents</h2>
+      <ul>
+  <li><a href="#quick-and-dirty-guide-to-monadic-parsers-and-angstrom">Quick and Dirty Guide to Monadic Parsers and Angstrom</a>
+    <ul>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#requirements">Requirements</a></li>
+      <li><a href="#terminology">Terminology</a></li>
+      <li><a href="#a-word-on-infix-operators">A word on infix operators</a></li>
+      <li><a href="#a-basic-explanation-of-monads-and-parsers">A basic explanation of monads and parsers</a></li>
+      <li><a href="#a-hello-world-example">A Hello World Example</a></li>
+      <li><a href="#more-advanced-parsers">More Advanced Parsers</a></li>
+      <li><a href="#abstract-syntax-tree">Abstract Syntax Tree</a></li>
+      <li><a href="#epilogue">Epilogue</a></li>
+    </ul>
+  </li>
+</ul>
+
+    </div>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="non-sidebar">
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <a href="https://github.com/OCamlverse/ocamlverse.github.io/edit/master/content/monadic-parsers-angstrom.md" class="edit_this_page">Edit</a>
+        <h1 id="quick-and-dirty-guide-to-monadic-parsers-and-angstrom">Quick and Dirty Guide to Monadic Parsers and Angstrom</h1>
+
+<p>Author: Metin Akat <a href="https://github.com/loxs">@loxs</a></p>
+
+<p>Review: Ivan Gotovchits <a href="https://github.com/ivg">@ivg</a></p>
+
+<h2 id="abstract">Abstract</h2>
+<p>This tutorial aims to give you abilities to write parsers quickly for
+ your daily tasks. It’s not a formal or academic explanation of parsers,
+ grammars, monads etc. On the contrary, it aims to be as informal as 
+possible and to have as little requirements for previous knowledge as 
+possible.</p>
+
+<h2 id="requirements">Requirements</h2>
+<p>You need to be a moderately accomplished programmer to read this. 
+Also, basic knowledge of OCaml and functional programming is required. 
+Probably reading (and understanding) the <a href="https://dev.realworldocaml.org/guided-tour.html">first chapter of Real World OCaml</a> is enough.
+We will not replicate the documentation of every individual <a href="https://github.com/inhabitedtype/angstrom">Angstrom</a> parser and combinator. They are documented <a href="https://github.com/inhabitedtype/angstrom/blob/master/lib/angstrom.mli">here</a>.
+ So although we will explain the usage, go consult the formal definition
+ if you need it.
+Also, there are formal documents describing monads and parser 
+combinators (and Angstrom mostly adheres to the conventions defined 
+there) but they are <strong>not</strong> preconditions for reading this tutorial.</p>
+
+<h2 id="terminology">Terminology</h2>
+<p>Monadic parsers are called so, because they use monads to allow you 
+to represent the convoluted logic of covering all the possible cases 
+when writing a grammar. Monads allow you to do things like “only proceed
+ if this condition is met”, which is really valuable when writing a 
+parser.
+Another term you will come upon is “<strong>parser combinator</strong>” 
+and in order to understand that, you need to know what is a “parser”. In
+ the case of monadic parser combinators, a parser is any function that 
+does a “piece of parsing” and the “parser combinator” is a monadic 
+operator provided by the library (in our case Angstrom) with the aim of 
+letting you combine your parsers in such a way that allows you to write 
+parsers without too many <code class="language-plaintext highlighter-rouge">if</code> or <code class="language-plaintext highlighter-rouge">match</code> expressions.</p>
+
+<h2 id="a-word-on-infix-operators">A word on infix operators</h2>
+<p>OCaml has this feature which is somewhat obscure and not always (or 
+very briefly) mentioned in books and tutorials. Depending on the first 
+character of a function, it can behave as an infix operator.
+This is a core feature of OCaml and Angstrom (and lots of other monadic 
+interfaces) exploit it in order to achieve their goals. Explained <a href="http://caml.inria.fr/pub/docs/manual-ocaml/expr.html">here</a> and <a href="http://caml.inria.fr/pub/docs/manual-ocaml/lex.html#sec82">here</a>.</p>
+
+<p>So anyone can define such a function like this:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="p">(</span> <span class="o">*&gt;</span> <span class="p">)</span> <span class="n">param1</span> <span class="n">param2</span> <span class="o">=</span>
+    <span class="n">calc_something</span> <span class="n">param1</span> <span class="n">param2</span>
+</code></pre></div></div>
+
+<p>Which can later be used like <code class="language-plaintext highlighter-rouge">param1 *&gt; param2</code></p>
+
+<p>Try to make sense of this concept before proceeding, as otherwise you will have a very hard time.</p>
+
+<h2 id="a-basic-explanation-of-monads-and-parsers">A basic explanation of monads and parsers</h2>
+<p>Lets see what the <code class="language-plaintext highlighter-rouge">*&gt;</code> combinator of Angstrom is used for.
+Presuming we have the following two parsers (which we’ll define later in this tutorial): <code class="language-plaintext highlighter-rouge">integer</code> and <code class="language-plaintext highlighter-rouge">whitespace</code>, we can write a combinator expression like this:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">whitespace</span> <span class="o">*&gt;</span> <span class="n">integer</span>
+</code></pre></div></div>
+<p>In pure English, this means: Parse whitespace, then discard it, then 
+parse integer and return it”. There is a corresponding combinator - <code class="language-plaintext highlighter-rouge">&lt;*</code> which does “the opposite”, so we can even write this:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">int_without_whitespace</span> <span class="o">=</span>
+   <span class="n">whitespace</span> <span class="o">*&gt;</span> <span class="n">integer</span> <span class="o">&lt;*</span> <span class="n">whitespace</span>
+</code></pre></div></div>
+<p>which means: 1) parse whitespace and (if successful) discard it 2) 
+parse integer and (if successful) retain it 3) parse whitespace and (if 
+successful) discard it, while returning the result of the previous step.
+ So overall evalutation of the whole expression returns the integer. 
+This is really powerful, as otherwise we would have to write lots of 
+functions like this:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">discard_first</span> <span class="n">parser1</span> <span class="n">parser2</span> <span class="n">input</span> <span class="o">=</span>
+    <span class="k">match</span> <span class="n">run_parser</span> <span class="n">parser1</span> <span class="n">input</span> <span class="k">with</span>
+    <span class="o">|</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="n">_result1</span> <span class="n">remainder</span> <span class="o">-&gt;</span> <span class="n">run_parser</span> <span class="n">parser2</span> <span class="n">remainder</span>
+    <span class="o">|</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Error</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="nc">Error</span> <span class="n">e</span>
+</code></pre></div></div>
+<p>Of course, the <a href="https://github.com/inhabitedtype/angstrom/blob/c914dbc91188e258027b56d91cc42edc40bbe3f7/lib/parser.ml#L110">actual implementation</a> is a bit more complex and relying on previous definitions, but in essence it does exactly what our naive function does.</p>
+
+<p>In the same way we could define <code class="language-plaintext highlighter-rouge">discard_second</code> and combine them like this:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">discard_second</span> <span class="p">(</span><span class="n">discard_first</span> <span class="n">whitespace</span> <span class="n">integer</span><span class="p">)</span> <span class="n">whitespace</span>
+</code></pre></div></div>
+
+<p>This is a a lot less straightforward and less readable. And the 
+situation becomes even worse if you tried writing more complex logic. 
+And that’s probably the main reason for the invention of the parser 
+monad, as it hides this complexity. So here is another amateur attempt 
+at defining what the parser monad is (at least for our context). You can
+ think of the parser monad like a device that links your parsers in a 
+chain (using the combinators), and runs them using a function that has 
+roughly the following definition:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="k">rec</span> <span class="n">run</span> <span class="n">state</span> <span class="n">remainder_of_input</span> <span class="o">=</span>
+  <span class="k">match</span> <span class="n">check_state_for_errors</span> <span class="n">state</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="nc">Error</span> <span class="n">e</span> <span class="o">-&gt;</span>
+    <span class="n">generate_error</span> <span class="n">state</span>
+  <span class="o">|</span> <span class="nc">Ok</span> <span class="n">result</span> <span class="o">-&gt;</span>
+    <span class="k">let</span> <span class="n">new_state</span> <span class="o">=</span> <span class="n">evaluate_next_combinator_with_result</span> <span class="n">state</span> <span class="k">in</span>
+ <span class="err">&nbsp;</span> <span class="err">&nbsp;</span><span class="n">run</span> <span class="n">new_state</span> <span class="n">new_state</span><span class="o">.</span><span class="n">next_parser</span>
+</code></pre></div></div>
+
+<p>And when you write your parsers and combinators, they get evaluated 
+in order by the state monad, which treats the combinators as special 
+conditions in order to decide what to do with your state and results. Of
+ course, the above definition is very naive and implementing the state 
+monad is quite a lot harder, but that (again) is the essence of it.</p>
+
+<h2 id="a-hello-world-example">A Hello World Example</h2>
+<p>So let’s proceed with actually defining our most basic (and functioning) parser.
+Consider this:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">open</span> <span class="nc">Angstrom</span>
+
+<span class="k">let</span> <span class="n">is_whitespace</span> <span class="o">=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="sc">'\x20'</span> <span class="o">|</span> <span class="sc">'\x0a'</span> <span class="o">|</span> <span class="sc">'\x0d'</span> <span class="o">|</span> <span class="sc">'\x09'</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+
+<span class="k">let</span> <span class="n">whitespace</span> <span class="o">=</span> <span class="n">take_while</span> <span class="n">is_whitespace</span>
+</code></pre></div></div>
+
+<p>Start utop and have Angstrom available there (<a href="http://ocamlverse.net/content/quickstart_ocaml_project_dune.html">here is a good tutorial on doing that</a>), then paste the above definitions, and we’ll get something like this evaluated:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">val</span> <span class="n">is_whitespace</span> <span class="o">:</span> <span class="kt">char</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="o">=</span> <span class="o">&lt;</span><span class="k">fun</span><span class="o">&gt;</span>
+<span class="k">val</span> <span class="n">whitespace</span> <span class="o">:</span> <span class="kt">string</span> <span class="n">t</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">abstr</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Angstrom (like other parsers) works on chars. It provides you with 
+tools to compare chars and act on the results. Our first function <code class="language-plaintext highlighter-rouge">is_whitespace</code>
+ provides just the comparison of whether a char is any of the chars 
+considered to constitute whitespace (at least for our needs right now). 
+The second function <code class="language-plaintext highlighter-rouge">whitespace</code> is the actual parser which is of the proper type to be considered by Angstrom to be a “parser”.</p>
+
+<p>We already use a predefined (in Angstrom) parser which is called <code class="language-plaintext highlighter-rouge">take_while</code>. You can consult the angstrom docs, and it’s also quite self explanatory, but it takes chars while our predicate (<code class="language-plaintext highlighter-rouge">is_whitespace</code>) returns true.</p>
+
+<p>We can then try it:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">whitespace</span> <span class="s2">"    "</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="s2">"    "</span>
+
+
+<span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">whitespace</span> <span class="s2">" 1 "</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="s2">" "</span>
+</code></pre></div></div>
+
+<p>Something interesting happened in the second example… Although we 
+provided a string that contains more than only whitespace, the parser is
+ perfectly happy to return only the whitespace that it was able to parse
+ (Just a single space). This is probably not what we want, and we need 
+to account for that in our program. But that’s how we have written our 
+parser - we haven’t instructed it to fail if it finds other things after
+ what we wanted. We can do that now:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">only_whitespace</span> <span class="o">=</span>
+  <span class="n">whitespace</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">parsed_whitespace</span> <span class="o">-&gt;</span>
+  <span class="n">peek_char</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">None</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="n">parsed_whitespace</span>
+  <span class="o">|</span> <span class="nc">Some</span> <span class="n">c</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="p">(</span><span class="nn">Format</span><span class="p">.</span><span class="n">sprintf</span> <span class="s2">"Unexpected char %c"</span> <span class="n">c</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And when we run it, we get:</p>
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">only_whitespace</span> <span class="s2">" 1 "</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Error</span> <span class="s2">": Unexpected char 1"</span>
+</code></pre></div></div>
+
+<p>Here we make use of the <code class="language-plaintext highlighter-rouge">&gt;&gt;=</code> combinator which means “If the previous parser is successful, take the result of it and feed it to the next parser”.</p>
+
+<p>Another built in parser is <code class="language-plaintext highlighter-rouge">peek_char</code> which looks ahead a character, whithout moving the current position of parser state forward in the input string.</p>
+
+<p>Also, note the usage of <code class="language-plaintext highlighter-rouge">return</code> and <code class="language-plaintext highlighter-rouge">fail</code>. If you come from imperative languages, <code class="language-plaintext highlighter-rouge">return</code> is not the same as what you are used to. Here <code class="language-plaintext highlighter-rouge">return</code> is just a function that packs what we give it into a structure recognized by the state monad as a “successful parsed result”. <code class="language-plaintext highlighter-rouge">fail</code>
+ is the opposite - it packs the result in a structure, that tells the 
+state monad that we have failed and we want it to treat this as an 
+“unsuccessful parser result”. Both success and “not success” can be 
+interpreted by higher level parsers the way we want (by using the 
+appropriate combinators). Of course, if a failure reaches the “top 
+layer” of the parser, Angstrom will just return it, as it did above.</p>
+
+<p>Lets look at another important concept when writing grammars:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">whitespace</span> <span class="s2">""</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="s2">""</span>
+</code></pre></div></div>
+
+<p>Here we feeded our parser with an empty string and we still got a successful result. That’s because <code class="language-plaintext highlighter-rouge">take_while</code>
+ won’t fail if it doesn’t encounter the chars which we are looking for. 
+But if we wanted it to, we could use its sibling, which in Angstrom is 
+called <code class="language-plaintext highlighter-rouge">take_while1</code>.
+ If we rewrite our whitespace function with it, it will fail unless it 
+encounters at least one successful evaluation of the predicate.
+This is an important decision when writing your parsers. When working 
+with whitespace, it is often reasonable to use <code class="language-plaintext highlighter-rouge">take_while</code>, if you want your whitespace to be optional in the language you are defining/parsing.</p>
+
+<p>But next, lets define a parser wich actually does make use of <code class="language-plaintext highlighter-rouge">take_while1</code>, so that we are able to parse integers:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">is_digit</span> <span class="o">=</span> <span class="k">function</span> <span class="k">'</span><span class="mi">0</span><span class="k">'</span><span class="o">..</span><span class="k">'</span><span class="mi">9</span><span class="k">'</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="bp">false</span>
+
+<span class="k">let</span> <span class="n">integer</span> <span class="o">=</span>
+    <span class="n">take_while1</span> <span class="n">is_digit</span>
+</code></pre></div></div>
+
+<p>And let’s test it:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">integer</span> <span class="s2">"1"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="s2">"1"</span>
+
+<span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">integer</span> <span class="s2">" "</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Error</span> <span class="s2">": count_while1"</span>
+
+<span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">integer</span> <span class="s2">" 1"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Error</span> <span class="s2">": count_while1"</span>
+</code></pre></div></div>
+
+<p>Do you see where is this going?</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="p">(</span><span class="n">whitespace</span> <span class="o">*&gt;</span> <span class="n">integer</span> <span class="o">&lt;*</span> <span class="n">whitespace</span> <span class="p">)</span> <span class="s2">" 1 "</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="s2">"1"</span>
+</code></pre></div></div>
+
+<p>So here is your monadic parsers “hello world” example :-)</p>
+
+<h2 id="more-advanced-parsers">More Advanced Parsers</h2>
+
+<p>Taking on from where we left, let’s see what are the problems we have with our current state of affairs:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="p">(</span><span class="n">whitespace</span> <span class="o">*&gt;</span> <span class="n">integer</span> <span class="o">&lt;*</span> <span class="n">whitespace</span> <span class="p">)</span> <span class="s2">" -1234"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Error</span> <span class="s2">": count_while1"</span>
+<span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="p">(</span><span class="n">whitespace</span> <span class="o">*&gt;</span> <span class="n">integer</span> <span class="o">&lt;*</span> <span class="n">whitespace</span> <span class="p">)</span> <span class="s2">" 1234.35"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="s2">"1234"</span>
+</code></pre></div></div>
+
+<p>We are not able to parse negative integers and neither are we able to parse floats. Lets give it a go:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">sign</span> <span class="o">=</span>
+  <span class="n">peek_char</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">function</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="k">'</span><span class="o">-</span><span class="k">'</span> <span class="o">-&gt;</span> <span class="n">advance</span> <span class="mi">1</span> <span class="o">&gt;&gt;|</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="s2">"-"</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="k">'</span><span class="o">+</span><span class="k">'</span> <span class="o">-&gt;</span> <span class="n">advance</span> <span class="mi">1</span> <span class="o">&gt;&gt;|</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="s2">"+"</span>
+    <span class="o">|</span> <span class="nc">Some</span> <span class="n">c</span>  <span class="k">when</span> <span class="p">(</span><span class="n">is_digit</span> <span class="n">c</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="s2">"+"</span>
+    <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="s2">"Sign or digit expected"</span>
+
+<span class="k">let</span> <span class="n">dot</span> <span class="o">=</span>
+  <span class="n">peek_char</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="nc">Some</span> <span class="sc">'.'</span> <span class="o">-&gt;</span> <span class="n">advance</span> <span class="mi">1</span> <span class="o">&gt;&gt;|</span> <span class="k">fun</span> <span class="bp">()</span> <span class="o">-&gt;</span> <span class="bp">true</span>
+  <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="bp">false</span>
+
+<span class="k">let</span> <span class="n">number</span> <span class="o">=</span>
+  <span class="n">sign</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">sign</span> <span class="o">-&gt;</span>
+  <span class="n">take_while1</span> <span class="n">is_digit</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">whole</span> <span class="o">-&gt;</span>
+  <span class="n">dot</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">function</span>
+  <span class="o">|</span> <span class="bp">false</span> <span class="o">-&gt;</span>
+     <span class="n">return</span> <span class="p">(</span><span class="n">float_of_string</span> <span class="p">(</span><span class="n">sign</span> <span class="o">^</span> <span class="n">whole</span><span class="p">))</span>
+  <span class="o">|</span> <span class="bp">true</span> <span class="o">-&gt;</span>
+     <span class="n">take_while1</span> <span class="n">is_digit</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">part</span> <span class="o">-&gt;</span>
+     <span class="n">return</span> <span class="p">(</span><span class="n">float_of_string</span> <span class="p">(</span><span class="n">sign</span> <span class="o">^</span> <span class="n">whole</span> <span class="o">^</span> <span class="s2">"."</span> <span class="o">^</span> <span class="n">part</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>This shouldn’t really be that more complex than before.
+One interesting concept here is employing <code class="language-plaintext highlighter-rouge">advance 1</code> where we peeked one char (which doesn’t advance the position of the parser) and then acting accordingly.
+Another new combinator is <code class="language-plaintext highlighter-rouge">&gt;&gt;|</code> which is quite like <code class="language-plaintext highlighter-rouge">&gt;&gt;=</code> but doesn’t require us to use <code class="language-plaintext highlighter-rouge">return</code>, but instead packs the result of the function for us.</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">number</span> <span class="s2">"-10.45"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">float</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="o">.</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">number</span> <span class="s2">"10.45"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">float</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="mi">10</span><span class="o">.</span><span class="mi">45</span>
+
+<span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">number</span> <span class="s2">"something_else 10.45"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">float</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Error</span> <span class="s2">": Sign or digit expected"</span>
+</code></pre></div></div>
+
+<p>By this point (and after consulting the <a href="https://github.com/inhabitedtype/angstrom/blob/master/lib/angstrom.mli">.mli docs</a>) you should be quite comfortable with understanding the example given in the Angstrom <a href="https://github.com/inhabitedtype/angstrom/blob/master/README.md">README</a></p>
+
+<p>But still, here is some explanation of some of the concepts used there…</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">&lt;|&gt;</code> combinator is like a logical <code class="language-plaintext highlighter-rouge">or</code>. If the left parser returns a failure, the right one is evaluated (with the same input, so this means backtracking)</li>
+  <li><code class="language-plaintext highlighter-rouge">lift1</code>, <code class="language-plaintext highlighter-rouge">lift2</code>, etc - here is some <a href="https://discuss.ocaml.org/t/angstrom-parser-optimization/1754">explanation</a>
+ on how to use these. They are (a little convoluted) way to tell the 
+parser monad to run several parsers in sequence while retaining 
+everything they return</li>
+  <li><code class="language-plaintext highlighter-rouge">fix</code> is the way to impose recursion on the parser monad</li>
+</ul>
+
+<h2 id="abstract-syntax-tree">Abstract Syntax Tree</h2>
+
+<p>Let’s revisit our number parser from above and try to combine it to 
+work with another parser. Imagine that we have a file with key/value 
+pairs where the key is a word and the value is a number:</p>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="n">key</span> <span class="o">=</span> <span class="n">take_while1</span> <span class="p">(</span><span class="k">function</span> <span class="k">'</span><span class="n">a'</span><span class="o">..</span><span class="k">'</span><span class="n">z'</span> <span class="o">-&gt;</span> <span class="bp">true</span> <span class="o">|</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="bp">false</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="n">key_value</span> <span class="o">=</span>
+  <span class="n">key</span> <span class="o">&lt;*</span> <span class="n">whitespace</span>
+  <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">k</span> <span class="o">-&gt;</span> <span class="n">number</span> <span class="o">&gt;&gt;=</span> <span class="k">fun</span> <span class="n">v</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="p">(</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="language-ocaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">utop</span> <span class="o">#</span> <span class="nn">Angstrom</span><span class="p">.</span><span class="n">parse_string</span> <span class="o">~</span><span class="n">consume</span><span class="o">:</span><span class="nc">Prefix</span> <span class="n">key_value</span> <span class="s2">"apples -23.48"</span><span class="p">;;</span>
+<span class="o">-</span> <span class="o">:</span> <span class="p">(</span><span class="kt">string</span> <span class="o">*</span> <span class="kt">float</span><span class="o">,</span> <span class="kt">string</span><span class="p">)</span> <span class="n">result</span> <span class="o">=</span> <span class="nn">Result</span><span class="p">.</span><span class="nc">Ok</span> <span class="p">(</span><span class="s2">"apples"</span><span class="o">,</span> <span class="o">-</span><span class="mi">23</span><span class="o">.</span><span class="mi">48</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For this very simple example, returning a tuple is OK, but it gets 
+ugly very fast if you try to parse more complex things. That’s the 
+reason you need to have more complex types which can coexist with each 
+other in a tree, the so called “abstract syntax tree”.</p>
+
+<p>That’s what they are doing here in the Angstrom JSON parser <a href="https://github.com/inhabitedtype/angstrom/blob/c914dbc91188e258027b56d91cc42edc40bbe3f7/examples/rFC7159.ml#L3">example</a></p>
+
+<p>If you are new to OCaml, by this point you should read about Variants and Records and start using them to represent your ASTs</p>
+
+<h2 id="epilogue">Epilogue</h2>
+
+<p>If you reached this point of the tutorial, you should be able to write pretty complex parsers with this knowledge.</p>
+
+<p>Here are some gotchas which might make your life easier/harder:</p>
+
+<ul>
+  <li>
+    <p>Try to use the <code class="language-plaintext highlighter-rouge">list</code> and <code class="language-plaintext highlighter-rouge">choice</code> combinators as little as possible. Read <a href="https://discuss.ocaml.org/t/angstrom-parser-optimization/1754">here</a> why. Instead, write more functions by using the <code class="language-plaintext highlighter-rouge">&gt;&gt;=</code> combinator as we did in the <code class="language-plaintext highlighter-rouge">number</code> parser. Also, you can use look ahead in order to decide what to do next.</p>
+  </li>
+  <li>
+    <p>Try to separate (into two steps) lexical and semantic analysis. 
+It’s much less bug prone if you have two separate codebases where one 
+only cares about identifying parts of your grammar and the next verifies
+ logical dependencies like “is this number negative” etc. This usually 
+means doing a second (or even third) pass over the AST where you do the 
+needed transformations (or build a completely separate structures out of
+ the AST).</p>
+  </li>
+  <li>
+    <p>Trust the compiler and the editor tools (like Merlin). Do not 
+waste huge amounts of time while trying to have a working version all 
+the time. You don’t need to constantly check (via utop) how things work.
+ If they typecheck, they most probably will work in the end.</p>
+  </li>
+</ul>
+
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER  -->
+<!--
+<div id="footer_wrap" class="outer">
+  <footer class="inner">
+  </footer>
+</div>
+-->
+
+<script>
+// Script for folding
+var collapsibles = document.getElementsByClassName("collapsible");
+for (coll of collapsibles) {
+  coll.addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+<!-- scripts for Algolia search bar -->
+<script type="text/javascript" src="Quick%20and%20Dirty%20Guide%20to%20Monadic%20Parsers%20and%20Angstrom%20_%20OCamlverse_files/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: 'c7952442a027ece120b50019cbebf398',
+indexName: 'ocamlverse',
+inputSelector: '#searchbar',
+debug: false // Set debug to true if you want to inspect the dropdown
+});
+</script>
+
+
+</body></html>
