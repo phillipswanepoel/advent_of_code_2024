@@ -59,19 +59,6 @@ let () = (printf "%d\n") output1
 
 (* PART TWO *)
 (* -------------------------------------------------------------------------- *)
-
-let fail_if_dont = 
-  peek_string 7
-  >>= function
-  | "don't()" -> fail "don't"
-  | _ -> take 1
-
-let fail_if_do = 
-  peek_string 4
-  >>= function
-  | "do()" -> fail "do"
-  | _ -> take 1
-
 let dos_and_donts =
   (peek_string 7
   >>= function
