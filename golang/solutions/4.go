@@ -8,70 +8,107 @@ import (
 
 var row_len, col_len = 0, 0
 
-const xmas_len = 3
+var xmas_len = 4
 
 var directions = [8]string{"up", "down", "left", "right", "upleft", "upright", "downleft", "downright"}
 
 func Solve_4() {
-	input, _ := os.ReadFile("data/4/input")
-
-	chars := [][]rune{}
-	for _, s := range strings.Split(strings.TrimSpace(string(input)), "\n") {
-		runes := []rune(s)
-		chars = append(chars, runes)
-	}
-
+	chars := readInputToMatrix("data/4/input")
 	row_len = len(chars)
 	col_len = len(chars[0])
 
-	var count = 0
-
-	for i, r := range chars {
-		for j, c := range r {
-			if c == 'X' || c == 'S' {
-				for _, d := range directions {
-					w := WindowFunc{chars, i, j}
-					word, err := w.getWindow(d)
-					if err != nil {
-						continue
-					}
-					if word == "XMAS" || word == "SAMX" {
-						count++
-					}
-				}
-
-			}
-		}
-	}
-
 	fmt.Println("PART ONE ANSWER: ")
-	fmt.Println(count / 2)
-
-	// PART TWO!
-	count2 := 0
-
-	for i, r := range chars {
-		for j, c := range r {
-			if c == 'A' && (i > 0) && (j > 0) {
-				w1 := WindowFunc{chars, i - 1, j - 1}
-				w2 := WindowFunc{chars, i - 1, j + 1}
-				word1, err := w1.getWindow("downright")
-				if err != nil {
-					continue
-				}
-				word2, err := w2.getWindow("downleft")
-				if err != nil {
-					continue
-				}
-				if (word1 == "MAS" || word1 == "SAM") && (word2 == "MAS" || word2 == "SAM") {
-					count2++
-				}
-			}
-		}
-	}
+	fmt.Println(solvePartOne(chars) / 2)
 
 	fmt.Println("PART TWO ANSWER: ")
-	fmt.Println(count2)
+	fmt.Println(solvePartTwo(chars))
+}
+
+func readInputToMatrix(filepath string) [][]rune {
+	input, _ := os.ReadFile(filepath)
+	chars := [][]rune{}
+	for _, s := range strings.Split(strings.TrimSpace(string(input)), "\n") {
+		chars = append(chars, []rune(s))
+	}
+	return chars
+}
+
+func solvePartOne(chars [][]rune) int {
+	count := 0
+	for i, row := range chars {
+		for j, char := range row {
+			if !isStartingChar(char) {
+				continue
+			}
+			count += countXMASPatterns(chars, i, j)
+		}
+	}
+	return count
+}
+
+func isStartingChar(c rune) bool {
+	return c == 'X' || c == 'S'
+}
+
+func countXMASPatterns(chars [][]rune, i, j int) int {
+	count := 0
+	w := WindowFunc{chars, i, j}
+
+	for _, direction := range directions {
+		word, err := w.getWindow(direction)
+		if err != nil {
+			continue
+		}
+		if isValidXMASPattern(word) {
+			count++
+		}
+	}
+	return count
+}
+
+func isValidXMASPattern(word string) bool {
+	return word == "XMAS" || word == "SAMX"
+}
+
+func solvePartTwo(chars [][]rune) int {
+	xmas_len = 3
+	count := 0
+	for i, row := range chars {
+		for j, char := range row {
+			if !isValidStartingPosition(char, i, j) {
+				continue
+			}
+			if hasIntersectingPatterns(chars, i, j) {
+				count++
+			}
+		}
+	}
+	return count
+}
+
+func isValidStartingPosition(char rune, i, j int) bool {
+	return char == 'A' && i > 0 && j > 0
+}
+
+func hasIntersectingPatterns(chars [][]rune, i, j int) bool {
+	w1 := WindowFunc{chars, i - 1, j - 1}
+	w2 := WindowFunc{chars, i - 1, j + 1}
+
+	word1, err1 := w1.getWindow("downright")
+	if err1 != nil {
+		return false
+	}
+
+	word2, err2 := w2.getWindow("downleft")
+	if err2 != nil {
+		return false
+	}
+
+	return isValidMASPattern(word1) && isValidMASPattern(word2)
+}
+
+func isValidMASPattern(word string) bool {
+	return word == "MAS" || word == "SAM"
 }
 
 type WindowFunc struct {
