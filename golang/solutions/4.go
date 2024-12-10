@@ -117,122 +117,36 @@ type WindowFunc struct {
 	col   int
 }
 
-func (w *WindowFunc) Up(r int) (rune, error) {
-	if w.row-r < 0 {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row-r][w.col], nil
+type Direction struct {
+	row int
+	col int
 }
 
-func (w *WindowFunc) Down(r int) (rune, error) {
-	if w.row+r >= col_len {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row+r][w.col], nil
-}
-
-func (w *WindowFunc) Left(r int) (rune, error) {
-	if w.col-r < 0 {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row][w.col-r], nil
-}
-
-func (w *WindowFunc) DownLeft(r int) (rune, error) {
-	if w.row+r >= col_len {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	if w.col-r < 0 {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row+r][w.col-r], nil
-}
-
-func (w *WindowFunc) UpLeft(r int) (rune, error) {
-	if w.row-r < 0 {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	if w.col-r < 0 {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row-r][w.col-r], nil
-}
-
-func (w *WindowFunc) Right(r int) (rune, error) {
-	if w.col+r >= row_len {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row][w.col+r], nil
-}
-
-func (w *WindowFunc) DownRight(r int) (rune, error) {
-	if w.row+r >= col_len {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	if w.col+r >= row_len {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row+r][w.col+r], nil
-}
-
-func (w *WindowFunc) UpRight(r int) (rune, error) {
-	if w.row-r < 0 {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	if w.col+r >= row_len {
-		return 0, fmt.Errorf("out of bounds")
-	}
-	return w.chars[w.row-r][w.col+r], nil
+var dirs = map[string]Direction{
+	"up":        {-1, 0},
+	"down":      {1, 0},
+	"left":      {0, -1},
+	"right":     {0, 1},
+	"upleft":    {-1, -1},
+	"upright":   {-1, 1},
+	"downleft":  {1, -1},
+	"downright": {1, 1},
 }
 
 func (w *WindowFunc) getWindow(direction string) (string, error) {
+	delta := dirs[direction]
 	out := ""
+
 	for r := 0; r < xmas_len; r++ {
-		var char rune
-		var err error
-		switch direction {
-		case "up":
-			char, err = w.Up(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "down":
-			char, err = w.Down(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "left":
-			char, err = w.Left(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "right":
-			char, err = w.Right(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "upleft":
-			char, err = w.UpLeft(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "upright":
-			char, err = w.UpRight(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "downleft":
-			char, err = w.DownLeft(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
-		case "downright":
-			char, err = w.DownRight(r)
-			if err != nil {
-				return "", fmt.Errorf("out of bounds: %v", err)
-			}
+		newRow := w.row + (delta.row * r)
+		newCol := w.col + (delta.col * r)
+
+		// Check bounds
+		if newRow < 0 || newRow >= col_len || newCol < 0 || newCol >= row_len {
+			return "", fmt.Errorf("out of bounds")
 		}
-		out += string(char)
+
+		out += string(w.chars[newRow][newCol])
 	}
 
 	return out, nil
