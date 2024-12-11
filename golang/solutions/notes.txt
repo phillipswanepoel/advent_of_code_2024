@@ -1,0 +1,11 @@
+<ctrl>h/l             : window swap
+<ctrl>left/right      : window size
+
+<space> `             : swap buffer
+[b, ]b, Shift+h/l     : next buffer
+<space>bd             : del buffer
+
+K                     : function help hover
+gd                    : goto func definition
+gr                    : goto func references
+<space><space> s      : AMAZING SEARCH
