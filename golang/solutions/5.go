@@ -79,24 +79,6 @@ func createGraph(orders []order, update update) graph.Graph[int, int] {
 	return g
 }
 
-func filterSlice(A, B []int) []int {
-	// Create a map to simulate a set for elements in A
-	setA := make(map[int]struct{})
-	for _, val := range A {
-		setA[val] = struct{}{}
-	}
-
-	// Filter elements in B based on presence in A
-	filteredB := make([]int, 0, len(B))
-	for _, val := range B {
-		if _, exists := setA[val]; exists {
-			filteredB = append(filteredB, val)
-		}
-	}
-
-	return filteredB
-}
-
 func readUpdates(filepath string) ([]order, []update) {
 	orders := []order{}
 	updates := []update{}
