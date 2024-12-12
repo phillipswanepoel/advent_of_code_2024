@@ -9,3 +9,5 @@ K                     : function help hover
 gd                    : goto func definition
 gr                    : goto func references
 <space><space> s      : AMAZING SEARCH
+
+<space>f(T/t)         : terminal in current/root dir

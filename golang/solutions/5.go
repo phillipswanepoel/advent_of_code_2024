@@ -3,8 +3,11 @@ package solutions
 import (
 	"fmt"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/dominikbraun/graph"
 )
 
 type order struct {
@@ -12,26 +15,86 @@ type order struct {
 	after  int
 }
 type update struct {
-	pages []int
+	pages  []int
+	graph  graph.Graph[int, int]
+	sorted []int
 }
 
 func Solve_5() {
-	orders, updates := readUpdates("data/5/test")
+	orders, updates := readUpdates("data/5/input")
 
-	for _, order := range orders {
-		fmt.Printf("%d|%d", order.before, order.after)
-		fmt.Println()
+	for i := range updates {
+		updates[i].graph = createGraph(orders, updates[i])
+		updates[i].sorted, _ = graph.TopologicalSort(updates[i].graph)
 	}
 
-	for _, update := range updates {
-		fmt.Println(update)
+	ans_1 := solve5_part1(updates)
+	fmt.Println("Part one answer: ")
+	fmt.Println(ans_1)
+
+	ans_2 := solve5_part2(updates)
+	fmt.Println("Part two answer: ")
+	fmt.Println(ans_2)
+}
+
+func solve5_part1(updates []update) int {
+	sum := 0
+	for _, u := range updates {
+		if u.isValidUpdate() {
+			middle := u.pages[len(u.pages)/2]
+			sum += middle
+		}
+	}
+	return sum
+}
+
+func solve5_part2(updates []update) int {
+	sum := 0
+	for _, u := range updates {
+		if !(u.isValidUpdate()) {
+			middle := u.sorted[len(u.sorted)/2]
+			sum += middle
+		}
+	}
+	return sum
+}
+
+func (u *update) isValidUpdate() bool {
+	// Remove elements from sorted that aren't in update
+	return slices.Equal(u.pages, u.sorted)
+}
+
+func createGraph(orders []order, update update) graph.Graph[int, int] {
+	g := graph.New(graph.IntHash, graph.Directed(), graph.Acyclic(), graph.PreventCycles())
+
+	for _, o := range orders {
+		if slices.Contains(update.pages, o.before) && slices.Contains(update.pages, o.after) {
+			_ = g.AddVertex(o.before)
+			_ = g.AddVertex(o.after)
+			_ = g.AddEdge(o.before, o.after)
+
+		}
 	}
 
-	// fmt.Println("PART ONE ANSWER: ")
-	// fmt.Println(solvePartOne(chars) / 2)
+	return g
+}
 
-	// fmt.Println("PART TWO ANSWER: ")
-	// fmt.Println(solvePartTwo(chars))
+func filterSlice(A, B []int) []int {
+	// Create a map to simulate a set for elements in A
+	setA := make(map[int]struct{})
+	for _, val := range A {
+		setA[val] = struct{}{}
+	}
+
+	// Filter elements in B based on presence in A
+	filteredB := make([]int, 0, len(B))
+	for _, val := range B {
+		if _, exists := setA[val]; exists {
+			filteredB = append(filteredB, val)
+		}
+	}
+
+	return filteredB
 }
 
 func readUpdates(filepath string) ([]order, []update) {
