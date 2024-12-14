@@ -3,5 +3,5 @@ package main
 import "advent/solutions"
 
 func main() {
-	solutions.Solve_5()
+	solutions.Solve_6()
 }
